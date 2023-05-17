@@ -13,7 +13,7 @@ export default function TaskList() {
    //Initialize list
    useEffect(() => {
       updateList()
-   }, [])
+   })
 
    const updateList = async () => {
       try {
@@ -64,7 +64,7 @@ export default function TaskList() {
       return (
          <div>
          {
-            taskList.map((ele) => { return <TaskItem item={ele}/>})
+            taskList.map((ele) => { return <TaskItem key={ele.id} item={ele}/>})
          }
          </div>
       )
