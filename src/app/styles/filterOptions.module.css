@@ -1,0 +1,19 @@
+.filterPanel {
+   width: 100%;
+   height: 50px;
+   border: 1px solid lightgrey;
+   margin-bottom: 50px;
+   display: flex;
+}
+
+.categoryTab {
+   
+}
+
+.frequencyTab {
+   flex: 1;
+}
+
+.completedFilterButton {
+
+}

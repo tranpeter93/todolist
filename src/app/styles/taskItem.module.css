@@ -1,0 +1,10 @@
+.container {
+   background-color: lightskyblue;
+   width: auto;
+   height: 50px;
+
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: center;
+}
