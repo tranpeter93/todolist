@@ -26,10 +26,11 @@ function writeDataToFile(data) {
 }
 
 export default function handler(req, res) {
+
    if ( req.method === 'GET' ) {
       const list = readDataFromFile()
 
-      res.status(200).json(list)
+      return res.status(200).json(list)
    }
    else if ( req.method === 'POST' ) {
       const {title, description} = req.body
@@ -38,13 +39,14 @@ export default function handler(req, res) {
       taskList.push(newTask)
 
       writeDataToFile(taskList)
-      res.status(200).json({message: 'Task added successfully', task: newTask})
+      return res.status(200).json({message: 'Task added successfully', task: newTask})
    }
    else if ( req.method === 'DELETE' ) {
       writeDataToFile([])
-      res.status(200).json({message: 'Task list cleared'})
+
+      return res.status(200).json({message: 'Task list cleared'})
    }
    else {
-      res.status(405).json({ error: 'method not allowed' })
+      return res.status(405).json({ error: 'method not allowed' })
    }
 }

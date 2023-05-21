@@ -1,13 +1,8 @@
 'use client';
 
-export default function FilterCompletedButton() {
-   
-   const filterCompleted = () => {
-
-      return requestCompleted();
-   }
+export default function FilterCompletedButton({setFilterCompleted}) {
 
    return (
-      <button className={''} onClick={() => {filterCompleted()}}>Completed</button>
+      <button className={''} onClick={setFilterCompleted}>Completed</button>
    )
 }

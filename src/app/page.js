@@ -1,6 +1,6 @@
 import styles from './styles/home.module.css'
-import FilterOptions from './components/server/FilterOptions'
-import TaskList from './components/server/TaskList'
+
+import TaskManager from './components/client/TaskManager'
 
 export default function Home() {
 
@@ -25,11 +25,7 @@ export default function Home() {
 
   return (
     <main className={styles.home}>
-      <div className={styles.mainView}>
-        <FilterOptions/>
-        <TaskList/>
-      </div>
-      <div className={styles.detailedSubView}></div>
+      <TaskManager/>
     </main>
   )
 }

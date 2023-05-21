@@ -1,0 +1,10 @@
+.mainView {
+   width: 1250px;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+.detailedSubView {
+
+}

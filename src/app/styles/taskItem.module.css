@@ -1,10 +1,42 @@
 .container {
    background-color: lightskyblue;
    width: auto;
-   height: 50px;
+   /* height: auto; */
+   /* display: flex;
+   flex-direction: column; */
 
+}
+
+.container:hover {   
+   color: white;
+}
+
+.header {
    display: flex;
    flex-direction: row;
-   justify-content: space-evenly;
+   justify-content: space-between;
    align-items: center;
+
+   font-size: small;
+   cursor: pointer;
+   height: 50px;
 }
+
+.title {
+   
+}
+
+.description {
+
+}
+
+.completed {
+
+}
+
+.deets {
+   font-size: large;
+   background-color: rgb(107, 136, 146);
+   padding: 20px;
+}
+

@@ -1,19 +1,48 @@
 'use client'
 
 import styles from '../../styles/tasklist.module.css'
-import TaskInput from '../client/TaskInput'
-import TaskItem from '../client/TaskItem'
+import TaskInput from './TaskInput'
+import TaskItem from './TaskItem'
 
 import { useState, useEffect } from 'react'
 
-export default function TaskList() {
+export default function TaskList({ filterCompleted }) {
 
    const [taskList, setTaskList] = useState(null)
 
    //Initialize list
    useEffect(() => {
       updateList()
-   })
+   }, [])
+
+
+   const updateTask = (task) => {
+      try {
+         const url = `http://localhost:3000/api/tasklist/${task.id}`
+
+         console.log( "PUT request sent to", url)
+
+         const response = fetch (url, {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify( task )
+         }) 
+
+         if ( response.ok ) {
+            console.log( "Task updated for completion" )
+
+            updateList();
+         }
+         else {
+            console.error( "error updating task", response.status )
+         }
+      }
+      catch (error) {
+         console.log("Could not retrieve tasklist", error)
+      }
+   }
 
    const updateList = async () => {
       try {
@@ -26,15 +55,11 @@ export default function TaskList() {
                const list = [...data]
 
                setTaskList(list)
-
-               console.log( taskList )
             })
       }
       catch (error) {
          console.log("Could not retrieve tasklist", error)
       }
-
-      console.log( "LIST", taskList )
    }
 
    const clearList = async () => {
@@ -42,7 +67,7 @@ export default function TaskList() {
          fetch ('http://localhost:3000/api/tasklist', {method: 'DELETE'})
             .then( resp => {
                if ( resp.ok ) {
-                  console.log( "Resourcec deleted" )
+                  console.log( "Resource deleted" )
                }
                else {
                   console.error( "Could not delete resource", response.status )
@@ -62,20 +87,29 @@ export default function TaskList() {
       if ( !taskList ) return 
 
       return (
-         <div>
+         <div className='listContainer'>
          {
-            taskList.map((ele) => { return <TaskItem key={ele.id} item={ele}/>})
+            taskList.map((ele) => { 
+               return <TaskItem key={ele.id} 
+                  item={ele} 
+                  updateItem={updateTask}
+                  showCompleted={ filterCompleted }
+                  />
+            })
          }
          </div>
       )
    }
 
+
+   useEffect(() => {
+      console.log("TASK LIST CHANGED")
+   }, [taskList])
+
    return (
       <div className={styles.taskList}>
          <TaskInput updateList={updateList}/>
-         {
-            renderList()
-         }
+         { renderList() }
       </div>
    )
 }
