@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 import styles from '../../styles/taskItem.module.css'
 import { Input, Button, Container } from '@mui/material';
 
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 export default function TaskItem({item, updateItem, showCompleted }) {
 
    const [completed, setCompleted] = useState(item.completed)
@@ -52,6 +56,7 @@ export default function TaskItem({item, updateItem, showCompleted }) {
    }
 
    const renderTitle = () => {
+      
       if ( isEditingTitle ) {
          return (
             <Input value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={handleKeyPress} onBlur={handleLossFocus}></Input>
@@ -68,14 +73,23 @@ export default function TaskItem({item, updateItem, showCompleted }) {
       }
 
       return (
-         <Container className={styles.container} onClick={handleExpand} >
-            <Button className={styles.header} >
-               { renderTitle() }
-               <div className={styles.completed}>
-                  <input type="checkbox" checked={completed} 
-                  onChange={() => {onFinishedTask(item)}}></input>
+         <Container className={styles.container}  >
+            <div className={styles.header}>
+               <div className={styles.leftside}>
+                  <div className={styles.completed}>
+                     <input type="checkbox" 
+                        checked={completed} 
+                        onChange={() => {onFinishedTask(item)}}>
+                     </input>
+                  </div>
+                  { renderTitle() }                  
                </div>
-            </Button>
+               <div className={styles.rightside}>
+                  <IconButton aria-label="delete" size="small" onClick={handleExpand}>
+                     <ExpandMoreIcon/>
+                  </IconButton>
+               </div>
+            </div>
             { renderSubsection() }
             
          </Container>

@@ -95,7 +95,7 @@ export default function TaskList({ filterCompleted }) {
                   item={ele} 
                   updateItem={updateTask}
                   showCompleted={ filterCompleted }
-                  />
+               />
             })
          }
          </div>
