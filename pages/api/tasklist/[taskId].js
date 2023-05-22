@@ -34,13 +34,14 @@ export default function handler(req, res) {
       method
    } = req
 
+
    if ( method === 'PUT' ) {
       
       const taskList = readDataFromFile()
 
       console.log("Current taskList", taskList)
       console.log("trying to update task with id", taskId, 
-         "to completion status", body.completed )
+         "with updated property", body)
 
       try {
          const numId = parseInt(taskId)   

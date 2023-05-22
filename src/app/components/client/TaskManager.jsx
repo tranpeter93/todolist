@@ -8,18 +8,16 @@ import styles from '../../styles/taskmanager.module.css'
 
 export default function TaskManager() {
 
-   const [filterCompleted, setFilterCompleted] = useState(false)
+   const [filterCompleted, setFilterCompleted] = useState(true)
 
-   const toggleFilterComplete = () => {
-      console.log("FILTERING COMPLETED", filterCompleted)
-
+   const handleToggleViewCompletedTasks = () => {
       setFilterCompleted( !filterCompleted )
    }
 
    return (
       <>
       <div className={styles.mainView}>
-         <FilterOptions toggleViewCompletedTasks={toggleFilterComplete}/>
+         <FilterOptions toggleViewCompletedTasks={ handleToggleViewCompletedTasks}/>
          <TaskList filterCompleted={filterCompleted}/>
          </div>
       <div className={styles.detailedSubView}></div>

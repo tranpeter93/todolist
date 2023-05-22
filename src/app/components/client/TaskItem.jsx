@@ -2,28 +2,25 @@
 
 import { useEffect, useState } from 'react'
 import styles from '../../styles/taskItem.module.css'
+import { Input, Button, Container } from '@mui/material';
 
-export default function TaskItem({item, updateItem, showCompleted}) {
+export default function TaskItem({item, updateItem, showCompleted }) {
 
    const [completed, setCompleted] = useState(item.completed)
+   const [title, setTitle] = useState(item.title)
+   const [isEditingTitle, setIsEditingTitle] = useState(false)
    const [expanded, setExpanded] = useState(false)
-   
-   useEffect(() => {
-      console.log("Item[",item.id,"] completed status:", completed)
-   }, [completed])
 
    const handleExpand = () => {
       setExpanded(!expanded)
-
-      console.log("EXPAND", expanded)
    }
 
-   const onFinishedTask = (val, target) => {
+   const onFinishedTask = () => {
       const newCompletionStatus = !completed
 
       setCompleted( newCompletionStatus )
 
-      updateItem({...target, completed: newCompletionStatus})
+      updateItem({...item, completed: newCompletionStatus})
    }
 
    const renderSubsection = () => {
@@ -31,9 +28,38 @@ export default function TaskItem({item, updateItem, showCompleted}) {
 
       return (
          <div className={styles.deets}>
-            test
+            <div className={styles.description}>
+               <span>Description: </span>
+               <span>{item.description ? item.description : 'none'}</span>
+            </div>
          </div>
       )
+   }
+
+   const handleKeyPress = (event) => {
+      const enterKeyCode = 13
+
+      if ( event.keyCode === enterKeyCode ) {
+
+         updateItem({...item, title: title})
+
+         setIsEditingTitle( false )
+      }
+   }
+
+   const handleLossFocus = () => {
+      setIsEditingTitle( false )
+   }
+
+   const renderTitle = () => {
+      if ( isEditingTitle ) {
+         return (
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={handleKeyPress} onBlur={handleLossFocus}></Input>
+         )
+      }
+      else {
+         return <div className={styles.title} onClick={(event) => {event.stopPropagation(); setIsEditingTitle( !isEditingTitle )}}>{title}</div>
+      }
    }
 
    const renderTaskItem = () => {
@@ -42,18 +68,17 @@ export default function TaskItem({item, updateItem, showCompleted}) {
       }
 
       return (
-         <div className={styles.container} >
-            <div className={styles.header} onClick={handleExpand}>
-               <div className={styles.title}>{item.title}</div>
-               <div className={styles.description}>{item.description}</div>
+         <Container className={styles.container} onClick={handleExpand} >
+            <Button className={styles.header} >
+               { renderTitle() }
                <div className={styles.completed}>
                   <input type="checkbox" checked={completed} 
-                  onChange={(e) => {onFinishedTask(e.target.value, item)}}></input>
+                  onChange={() => {onFinishedTask(item)}}></input>
                </div>
-            </div>
+            </Button>
             { renderSubsection() }
             
-         </div>
+         </Container>
       )
    }
 

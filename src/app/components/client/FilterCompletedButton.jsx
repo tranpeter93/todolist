@@ -1,8 +1,10 @@
 'use client';
 
+import { Button } from '@mui/material';
+
 export default function FilterCompletedButton({setFilterCompleted}) {
 
    return (
-      <button className={''} onClick={setFilterCompleted}>Completed</button>
+      <Button className={''} onClick={setFilterCompleted}>Completed</Button>
    )
 }

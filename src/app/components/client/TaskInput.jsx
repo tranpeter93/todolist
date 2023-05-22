@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import styles from '../../styles/taskInput.module.css'
+import { Input, Button, Paper, TextField } from '@mui/material';
 
 export default function TaskInput({updateList}) {
 
@@ -42,14 +43,14 @@ export default function TaskInput({updateList}) {
    return (
       <div className={styles.taskInput}>
          <div className={styles.addTask}>
-            <button className={styles.addTaskButton} onClick={() => handleAddTask()}>+</button>
+            <Button className={styles.addTaskButton} onClick={() => handleAddTask()}>+</Button>
          </div>
          <div className={styles.taskDetails}>
             <div className={styles.taskTitle}>
-               <input type='text' placeholder='title' value={title} onChange={(e) => setTitle(e.target.value)}></input>
+               <TextField type='text' label='title' value={title} onChange={(e) => setTitle(e.target.value)} variant="filled" size="small"></TextField>
             </div>
             <div className={styles.taskDescription}>
-               <input type='text' placeholder='description' value={description} onChange={(e) => {setDescription(e.target.value)}}></input>
+               <TextField type='text' label='description' value={description} onChange={(e) => {setDescription(e.target.value)}} variant="filled" size="small"></TextField>
             </div>
             <div className={styles.taskDate}>
                {/* <input type='date'></input>

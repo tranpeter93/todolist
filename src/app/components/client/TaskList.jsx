@@ -1,5 +1,6 @@
 'use client'
 
+import { Stack } from '@mui/material'
 import styles from '../../styles/tasklist.module.css'
 import TaskInput from './TaskInput'
 import TaskItem from './TaskItem'
@@ -18,7 +19,7 @@ export default function TaskList({ filterCompleted }) {
 
    const updateTask = (task) => {
       try {
-         const url = `http://localhost:3000/api/tasklist/${task.id}`
+         const url = `/api/tasklist/${task.id}`
 
          console.log( "PUT request sent to", url)
 
@@ -46,7 +47,7 @@ export default function TaskList({ filterCompleted }) {
 
    const updateList = async () => {
       try {
-         fetch ('http://localhost:3000/api/tasklist')
+         fetch ('/api/tasklist')
             .then( response => response.json() )
             .then( data => {
 
@@ -64,7 +65,7 @@ export default function TaskList({ filterCompleted }) {
 
    const clearList = async () => {
       try {
-         fetch ('http://localhost:3000/api/tasklist', {method: 'DELETE'})
+         fetch ('/api/tasklist', {method: 'DELETE'})
             .then( resp => {
                if ( resp.ok ) {
                   console.log( "Resource deleted" )
@@ -87,7 +88,7 @@ export default function TaskList({ filterCompleted }) {
       if ( !taskList ) return 
 
       return (
-         <div className='listContainer'>
+         <div>
          {
             taskList.map((ele) => { 
                return <TaskItem key={ele.id} 
@@ -100,11 +101,6 @@ export default function TaskList({ filterCompleted }) {
          </div>
       )
    }
-
-
-   useEffect(() => {
-      console.log("TASK LIST CHANGED")
-   }, [taskList])
 
    return (
       <div className={styles.taskList}>

@@ -7,7 +7,7 @@ export default function FilterOptions({requestActives, toggleViewCompletedTasks}
    return (
       <div className={styles.filterPanel}>
          <div className={styles.categoryTab}>
-            <FilterActiveButton setFilterActives={requestActives}/>
+            {/* <FilterActiveButton setFilterActives={requestActives}/> */}
             <FilterCompletedButton setFilterCompleted={toggleViewCompletedTasks}/>
          </div>
          <div className={styles.frequencyTab}></div>

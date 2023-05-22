@@ -1,6 +1,10 @@
 .container {
-   background-color: lightskyblue;
+   /* background-color: lightskyblue; */
+   border: 1px solid lightskyblue;
    width: auto;
+   padding-bottom: 10px;
+   padding-top: 10px;
+   margin-bottom: 10px;
    /* height: auto; */
    /* display: flex;
    flex-direction: column; */
@@ -35,8 +39,9 @@
 }
 
 .deets {
-   font-size: large;
-   background-color: rgb(107, 136, 146);
+   font-size: small;
+   background-color: lightgray;
+   color: black;
    padding: 20px;
 }
 
